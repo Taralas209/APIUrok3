@@ -42,7 +42,7 @@ def is_bitlink(link, access_token):
     return linkstatus_response.ok
 
 
-def createParser():
+def get_link():
     parser = argparse.ArgumentParser()
     parser.add_argument('--url_link', type=str, help='Введите ссылку', default='test.test')
     args = parser.parse_args()
@@ -52,7 +52,7 @@ def createParser():
 def main():
     load_dotenv()
     access_token = os.environ.get('BITLY_ACCESS_TOKEN')
-    link = createParser()
+    link = get_link()
     try:
         if is_bitlink(link, access_token):
             clicks_count = count_link_clicks(link, access_token)
