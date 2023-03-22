@@ -4,8 +4,6 @@ import argparse
 from dotenv import load_dotenv
 from urllib.parse import urlparse, urlencode
 
-load_dotenv()
-
 def shorten_link(link, access_token):
     custom_title = input('Дайте название вашему битлинку:')
     bitly_link_shorten = 'https://api-ssl.bitly.com/v4/shorten'
@@ -55,6 +53,7 @@ def createParser():
     return link
 
 def main():
+    load_dotenv()
     access_token = os.environ.get('BITLY_ACCESS_TOKEN')
     link = createParser()
     try:
