@@ -8,7 +8,7 @@ To use this script, you need to have Python installed on your system. You can do
 
 To install the required dependencies, run the following command:
 
-"pip install -r requirements.txt"
+`pip install -r requirements.txt`
 
 ## Installation
 
@@ -16,7 +16,7 @@ To use this script, you need to have Python installed on your system. You can do
 
 To install the required dependencies, run the following command:
 
-"pip install -r requirements.txt"
+`pip install -r requirements.txt`
 
 
 ## Setup
@@ -24,7 +24,7 @@ To install the required dependencies, run the following command:
 1. Create an account on [Bitly](https://bitly.com/) and generate an access token from the [API section](https://app.bitly.com/settings/api/) in your account settings.
 2. Create a `.env` file in the same directory as the script, and add the following line:
 
-"BITLY_ACCESS_TOKEN=<your_access_token>"
+`BITLY_ACCESS_TOKEN=<your_access_token`
 
 
 Replace `<your_access_token>` with the access token you generated from Bitly.
@@ -35,7 +35,7 @@ To use the script, open a terminal or command prompt and navigate to the directo
 
 To shorten a URL, run the following command:
 
-"python main.py --url_link <your_long_url>"
+`python main.py --url_link <your_long_url>`
 
 Replace `<your_long_url>` with the URL you want to shorten.
 
@@ -43,7 +43,7 @@ Replace `<your_long_url>` with the URL you want to shorten.
 
 To check the click count for an existing Bitly link, run the same command with the Bitly link:
 
-"python main.py --url_link <your_bitly_link>"
+`python main.py --url_link <your_bitly_link>`
 
 Replace `<your_bitly_link>` with the Bitly link you want to check the click count for.
 
