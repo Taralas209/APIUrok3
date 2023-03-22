@@ -13,9 +13,9 @@ def shorten_link(link, access_token, custom_title):
         "long_url": link,
         "title": custom_title
     }
-    response_post = requests.post(bitly_linkshortener_url, headers=headers, json=payload)
-    response_post.raise_for_status()
-    return response_post.json()['link']
+    shortened_link_response = requests.post(bitly_linkshortener_url, headers=headers, json=payload)
+    shortened_link_response.raise_for_status()
+    return shortened_link_response.json()['link']
 
 def count_link_clicks(link, access_token):
     parsed_link = urlparse(link)
@@ -27,9 +27,9 @@ def count_link_clicks(link, access_token):
     payload = {
         "units": "-1"
     }
-    response_count = requests.get(bitly_linkcounter_url, headers=headers, params=payload)
-    response_count.raise_for_status()
-    return response_count.json()['total_clicks']
+    clicks_summary_response = requests.get(bitly_linkcounter_url, headers=headers, params=payload)
+    clicks_summary_response.raise_for_status()
+    return clicks_summary_response.json()['total_clicks']
 
 def is_bitlink(link, access_token):
     parsed_link = urlparse(link)
@@ -38,8 +38,8 @@ def is_bitlink(link, access_token):
     headers = {
         'Authorization': f'Bearer {access_token}'
     }
-    response_link = requests.get(bitly_linkstatus_url, headers=headers)
-    return response_link.ok
+    linkstatus_response = requests.get(bitly_linkstatus_url, headers=headers)
+    return linkstatus_response.ok
 
 
 def createParser():
