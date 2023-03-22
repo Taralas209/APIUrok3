@@ -2,7 +2,7 @@ import os
 import requests
 import argparse
 from dotenv import load_dotenv
-from urllib.parse import urlparse, urlencode
+from urllib.parse import urlparse
 
 def shorten_link(link, access_token, custom_title):
     bitly_linkshortener_url = 'https://api-ssl.bitly.com/v4/shorten'
@@ -28,7 +28,7 @@ def count_link_clicks(link, access_token):
     payload = {
         "units": "-1"
     }
-    response_count = requests.get(bitly_linkcounter_url, headers=headers, params=urlencode(payload))
+    response_count = requests.get(bitly_linkcounter_url, headers=headers, params=payload)
     response_count.raise_for_status()
     return response_count.json()['total_clicks']
 
