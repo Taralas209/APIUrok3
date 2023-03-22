@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from urllib.parse import urlparse, urlencode
 
 def shorten_link(link, access_token, custom_title):
-    bitly_link_shorten = 'https://api-ssl.bitly.com/v4/shorten'
+    bitly_linkshortener_url = 'https://api-ssl.bitly.com/v4/shorten'
     headers = {
         'Authorization': f'Bearer {access_token}'
     }
@@ -14,33 +14,32 @@ def shorten_link(link, access_token, custom_title):
         "domain": "bit.ly",
         "title": custom_title
     }
-    response_post = requests.post(bitly_link_shorten, headers=headers, json=payload)
+    response_post = requests.post(bitly_linkshortener_url, headers=headers, json=payload)
     response_post.raise_for_status()
     return response_post.json()['link']
 
 def count_link_clicks(link, access_token):
     parsed_link = urlparse(link)
-    bitlink = parsed_link.path
-    bitly_link_count = 'https://api-ssl.bitly.com/v4/bitlinks/bit.ly{}/'\
-                'clicks/summary'.format(bitlink)
+    bitly_linkcounter_url = 'https://api-ssl.bitly.com/v4/bitlinks/bit.ly{}/'\
+                'clicks/summary'.format(parsed_link.path)
     headers = {
         'Authorization': f'Bearer {access_token}'
     }
     payload = {
         "units": "-1"
     }
-    response_count = requests.get(bitly_link_count, headers=headers, params=urlencode(payload))
+    response_count = requests.get(bitly_linkcounter_url, headers=headers, params=urlencode(payload))
     response_count.raise_for_status()
     return response_count.json()['total_clicks']
 
 def is_bitlink(link, access_token):
     parsed_link = urlparse(link)
     modified_link = parsed_link.netloc + parsed_link.path
-    bitly_link_info = 'https://api-ssl.bitly.com/v4/bitlinks/{}'.format(modified_link)
+    bitly_linkstatus_url = 'https://api-ssl.bitly.com/v4/bitlinks/{}'.format(modified_link)
     headers = {
         'Authorization': f'Bearer {access_token}'
     }
-    response_link = requests.get(bitly_link_info, headers=headers)
+    response_link = requests.get(bitly_linkstatus_url, headers=headers)
     return response_link.ok
 
 
