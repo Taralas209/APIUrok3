@@ -11,7 +11,6 @@ def shorten_link(link, access_token, custom_title):
     }
     payload = {
         "long_url": link,
-        "domain": "bit.ly",
         "title": custom_title
     }
     response_post = requests.post(bitly_linkshortener_url, headers=headers, json=payload)
