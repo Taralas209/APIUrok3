@@ -4,8 +4,7 @@ import argparse
 from dotenv import load_dotenv
 from urllib.parse import urlparse, urlencode
 
-def shorten_link(link, access_token):
-    custom_title = input('Дайте название вашему битлинку:')
+def shorten_link(link, access_token, custom_title):
     bitly_link_shorten = 'https://api-ssl.bitly.com/v4/shorten'
     headers = {
         'Authorization': f'Bearer {access_token}'
@@ -17,7 +16,7 @@ def shorten_link(link, access_token):
     }
     response_post = requests.post(bitly_link_shorten, headers=headers, json=payload)
     response_post.raise_for_status()
-    print(response_post.json()['link'])
+    return response_post.json()['link']
 
 def count_link_clicks(link, access_token):
     parsed_link = urlparse(link)
@@ -32,7 +31,7 @@ def count_link_clicks(link, access_token):
     }
     response_count = requests.get(bitly_link_count, headers=headers, params=urlencode(payload))
     response_count.raise_for_status()
-    print(response_count.json()['total_clicks'])
+    return response_count.json()['total_clicks']
 
 def is_bitlink(link, access_token):
     parsed_link = urlparse(link)
@@ -58,9 +57,13 @@ def main():
     link = createParser()
     try:
         if is_bitlink(link, access_token):
-            count_link_clicks(link, access_token)
+            clicks_count = count_link_clicks(link, access_token)
+            print(clicks_count)
         else:
             shorten_link(link, access_token)
+            custom_title = input('Дайте название вашему битлинку:')
+            shortened_link = shorten_link(link, access_token, custom_title)
+            print(shortened_link)
     except requests.exceptions.HTTPError as error:
          print(f"HTTP error occurred: {error}")
 
