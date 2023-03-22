@@ -33,7 +33,7 @@ def count_link_clicks(link, access_token):
 
 def is_bitlink(link, access_token):
     parsed_link = urlparse(link)
-    modified_link = parsed_link.netloc + parsed_link.path
+    modified_link = f"{parsed_link.netloc}{parsed_link.path}"
     bitly_linkstatus_url = 'https://api-ssl.bitly.com/v4/bitlinks/{}'.format(modified_link)
     headers = {
         'Authorization': f'Bearer {access_token}'
