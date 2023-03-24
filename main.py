@@ -57,7 +57,7 @@ def get_link():
 
 def main():
     load_dotenv()
-    access_token = os.environ.get('BITLY_ACCESS_TOKEN')
+    access_token = os.environ['BITLY_ACCESS_TOKEN']
     link, link_title  = get_link()
     try:
         if is_bitlink(link, access_token):
