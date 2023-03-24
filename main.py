@@ -45,20 +45,19 @@ def is_bitlink(link, access_token):
     return linkstatus_response.ok
 
 
-def get_link():
+def create_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('--link', type=str, help='Введите ссылку', default='test.test')
     parser.add_argument('--link_title', type=str, help='Введите название ссылки', default='another bitlink')
-    args = parser.parse_args()
-    link = args.link
-    link_title = args.custom_title
-    return link, link_title
+    return parser.parse_args()
 
 
 def main():
     load_dotenv()
     access_token = os.environ['BITLY_ACCESS_TOKEN']
-    link, link_title  = get_link()
+    parser  = create_parser()
+    link = parser.link
+    link_title = parser.link_title
     try:
         if is_bitlink(link, access_token):
             clicks_count = count_link_clicks(link, access_token)
