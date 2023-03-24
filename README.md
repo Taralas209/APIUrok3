@@ -35,15 +35,15 @@ To use the script, open a terminal or command prompt and navigate to the directo
 
 To shorten a URL, run the following command:
 
-`python main.py --url_link <your_long_url>`
+`python main.py --link <your_link_to_shorten>`
 
-Replace `<your_long_url>` with the URL you want to shorten.
+Replace `<your_link_to_shorten>` with the URL you want to shorten.
 
 <br>
 
 To check the click count for an existing Bitly link, run the same command with the Bitly link:
 
-`python main.py --url_link <your_bitly_link>`
+`python main.py --link <your_bitly_link>`
 
 Replace `<your_bitly_link>` with the Bitly link you want to check the click count for.
 
