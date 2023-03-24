@@ -47,28 +47,27 @@ def is_bitlink(link, access_token):
 
 def get_link():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--url_link', type=str, help='Введите ссылку', default='test.test')
-    parser.add_argument('--custom_title', type=str, help='Введите название ссылки', default='another bitlink')
+    parser.add_argument('--link', type=str, help='Введите ссылку', default='test.test')
+    parser.add_argument('--link_title', type=str, help='Введите название ссылки', default='another bitlink')
     args = parser.parse_args()
-    link = args.url_link
-    custom_title = args.custom_title
-    return link, custom_title
+    link = args.link
+    link_title = args.custom_title
+    return link, link_title
 
 
 def main():
     load_dotenv()
     access_token = os.environ.get('BITLY_ACCESS_TOKEN')
-    link, custom_title  = get_link()
+    link, link_title  = get_link()
     try:
         if is_bitlink(link, access_token):
             clicks_count = count_link_clicks(link, access_token)
             print(clicks_count)
         else:
-            shortened_link = shorten_link(link, access_token, custom_title)
+            shortened_link = shorten_link(link, access_token, link_title)
             print(shortened_link)
     except requests.exceptions.HTTPError as error:
          print(f"HTTP error occurred: {error}")
-
 
 
 if __name__ =="__main__":
